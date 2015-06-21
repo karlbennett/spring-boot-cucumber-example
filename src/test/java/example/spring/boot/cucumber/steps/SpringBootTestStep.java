@@ -9,6 +9,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = CucumberConfiguration.class, loader = SpringApplicationContextLoader.class)
-@WebIntegrationTest({"server.port=0", "management.port=0"})
+@WebIntegrationTest
 public abstract class SpringBootTestStep {
 }

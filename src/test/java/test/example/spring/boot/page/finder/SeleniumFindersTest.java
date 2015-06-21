@@ -72,4 +72,23 @@ public class SeleniumFindersTest {
         // Then
         assertThat(actual, equalTo(expected));
     }
+
+    @Test
+    public void Can_find_an_element_by_its_value() {
+
+        final String value = someString();
+        final By byValue = mock(By.class);
+
+        final WebElement expected = mock(WebElement.class);
+
+        // Given
+        given(by.value(value)).willReturn(byValue);
+        given(driver.findElement(byValue)).willReturn(expected);
+
+        // When
+        final WebElement actual = finders.findByValue(value);
+
+        // Then
+        assertThat(actual, equalTo(expected));
+    }
 }

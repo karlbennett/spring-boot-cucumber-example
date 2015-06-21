@@ -30,4 +30,9 @@ public class SeleniumFinders implements Finders {
     public WebElement findByText(String tag, String text) {
         return driver.findElement(by.text(tag, text));
     }
+
+    @Override
+    public WebElement findByValue(String value) {
+        return driver.findElement(by.value(value));
+    }
 }

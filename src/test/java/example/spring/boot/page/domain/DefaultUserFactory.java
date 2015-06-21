@@ -3,7 +3,7 @@ package example.spring.boot.page.domain;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import static shiver.me.timbers.data.random.RandomStrings.someString;
+import static shiver.me.timbers.data.random.RandomStrings.buildSomeString;
 
 @Component
 public class DefaultUserFactory implements UserFactory {
@@ -17,11 +17,15 @@ public class DefaultUserFactory implements UserFactory {
 
     @Override
     public User randomUser() {
-        return userHolder.set(new User(someString(), someString()));
+        return userHolder.set(new User(randomString(), randomString()));
     }
 
     @Override
     public User currentUser() {
         return userHolder.get();
+    }
+
+    private String randomString() {
+        return buildSomeString().thatContainsAlphanumericCharacters().withLengthBetween(1, 20).build();
     }
 }

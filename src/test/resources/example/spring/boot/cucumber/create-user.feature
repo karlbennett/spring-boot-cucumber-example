@@ -5,3 +5,4 @@ Feature: A user can be created
     Given I am on the user creation page
     When I create a new user
     Then the user should have been created
+    And I should see the users details

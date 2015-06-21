@@ -14,6 +14,8 @@ import static shiver.me.timbers.data.random.RandomStrings.someString;
 
 public class PropertyBaseUrlTest {
 
+    private static final UnsupportedCharSequence UNSUPPORTED = new UnsupportedCharSequence();
+
     private CharSequence url;
     private MockBasePort basePort;
     private MockBasePath basePath;
@@ -34,7 +36,24 @@ public class PropertyBaseUrlTest {
     }
 
     @Test
+    public void The_url_is_not_evaluated_on_creation() {
+
+        // When
+        new PropertyBaseUrl(UNSUPPORTED, UNSUPPORTED, UNSUPPORTED);
+    }
+
+    @Test
     public void Can_to_string() {
+
+        // When
+        final String actual = baseUrl.toString();
+
+        // Then
+        assertThat(actual, equalTo(baseUrlString));
+    }
+
+    @Test
+    public void Can_to_string_with_no_port() {
 
         // Given
         final MockBasePort basePort = new MockBasePort("");
@@ -46,16 +65,6 @@ public class PropertyBaseUrlTest {
 
         // Then
         assertThat(actual, equalTo(expected));
-    }
-
-    @Test
-    public void Can_to_string_with_no_port() {
-
-        // When
-        final String actual = baseUrl.toString();
-
-        // Then
-        assertThat(actual, equalTo(baseUrlString));
     }
 
     @Test
@@ -157,6 +166,29 @@ public class PropertyBaseUrlTest {
         @Override
         public CharSequence subSequence(int start, int end) {
             return charSequence.subSequence(start, end);
+        }
+    }
+
+    private static class UnsupportedCharSequence implements BasePort, BasePath {
+
+        @Override
+        public int length() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public char charAt(int index) {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public CharSequence subSequence(int start, int end) {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public String toString() {
+            throw new UnsupportedOperationException();
         }
     }
 }

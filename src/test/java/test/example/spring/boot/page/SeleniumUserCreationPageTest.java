@@ -72,12 +72,14 @@ public class SeleniumUserCreationPageTest {
         final WebElement passwordInput = mock(WebElement.class);
         final String username = someString();
         final String password = someString();
+        final WebElement createButton = mock(WebElement.class);
 
         // Given
         given(finders.findByLabel("User Name")).willReturn(usernameInput);
         given(finders.findByLabel("Password")).willReturn(passwordInput);
         given(user.getUsername()).willReturn(username);
         given(user.getPassword()).willReturn(password);
+        given(finders.findByValue("Create")).willReturn(createButton);
 
         // When
         page.create(user);
@@ -85,5 +87,6 @@ public class SeleniumUserCreationPageTest {
         // Then
         verify(usernameInput).sendKeys(username);
         verify(passwordInput).sendKeys(password);
+        verify(createButton).click();
     }
 }

@@ -7,4 +7,6 @@ public interface Bys {
     By id(String id);
 
     By text(String tag, String text);
+
+    By value(String value);
 }

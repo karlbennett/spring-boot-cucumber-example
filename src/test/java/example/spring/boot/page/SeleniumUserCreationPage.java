@@ -36,5 +36,6 @@ public class SeleniumUserCreationPage implements UserCreationPage {
     public void create(User user) {
         finders.findByLabel("User Name").sendKeys(user.getUsername());
         finders.findByLabel("Password").sendKeys(user.getPassword());
+        finders.findByValue("Create").click();
     }
 }
